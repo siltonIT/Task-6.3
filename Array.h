@@ -1,7 +1,14 @@
 #pragma once
 
 #include <utility>
+#include <fstream>
 #include "Move.h"
+#include "Walk.h"
+#include "Bus.h"
+#include "Taxi.h"
+#include "Trolley.h"
+#include "Car.h"
+#include "Metro.h"
 
 #define size_t unsigned int
 
@@ -34,11 +41,17 @@ public:
 		++_size;
 	}
 
+	void export_to_file(const std::string&) const;
+
+	void import_from_file(const std::string&);
+
 	void pop_back();
 
 	void print() const;
 
 	void clear();
+
+	Move*& operator[](const size_t&);
 
 	size_t size() const;
 

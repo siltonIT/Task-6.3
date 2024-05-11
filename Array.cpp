@@ -37,6 +37,99 @@ Array::~Array() {
 	clear();
 }
 
+void Array::export_to_file(const std::string& export_path) const {
+	std::ofstream out(export_path, std::ios::out);
+	if(!out.is_open())
+		return;
+
+	out << _size << '\n';
+	for(size_t i = 0; i < _size; ++i)
+		out << _seq[i]->get_fields();
+
+	out.close();
+}
+
+void Array::import_from_file(const std::string& import_path) {
+	std::ifstream in(import_path, std::ios::in);
+	if(!in.is_open())
+		return;
+
+	in >> _capacity;
+	delete[] _seq;
+	_size = 0;
+	_seq = new Move*[++_capacity];
+
+
+	double x = 0, y = 0;
+	size_t time = 0;
+	double price = 0;
+	while(!in.eof()) {
+		std::string object_type;
+		in >> object_type;
+
+		if(object_type == "Walk") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			in >> time;
+
+			Move* move = new Walk(start, end, time);
+			_seq[_size++] = move;
+		} else if(object_type == "Bus") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			in >> time >> price;
+
+			Move* move = new Bus(start, end, time, price);
+			_seq[_size++] = move;
+		} else if(object_type == "Metro") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			in >> time >> price;
+
+			Move* move = new Metro(start, end, time, price);
+			_seq[_size++] = move;
+		} else if(object_type == "Trolley") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			in >> time >> price;
+
+			Move* move = new Trolley(start, end, time, price);
+			_seq[_size++] = move;
+		} else if(object_type == "Taxi") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			in >> time >> price;
+
+			Move* move = new Taxi(start, end, time, price);
+			_seq[_size++] = move;
+		} else if (object_type == "Car") {
+			in >> x >> y;
+			Point start(x, y);
+			in >> x >> y;
+			Point end(x, y);
+			std::string website;
+			in >> time >> price >> website;
+			
+			char* path = new char[website.size()];
+			for(size_t i = 0; i < website.size(); ++i) 
+				path[i] = website[i];
+			
+			Move* move = new Car(start, end, time, price, path);
+			_seq[_size++] = move;
+		}
+	}
+}
+
 void Array::pop_back() {
 	--_size;
 }
@@ -55,6 +148,10 @@ void Array::clear() {
 	_seq = nullptr;
 	_capacity = 1;
 	_size = 0;
+}
+
+Move*& Array::operator[](const size_t& ind) {
+	return _seq[ind];
 }
 
 size_t Array::size() const {
