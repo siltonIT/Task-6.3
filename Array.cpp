@@ -53,12 +53,17 @@ void Array::import_from_file(const std::string& import_path) {
 	std::ifstream in(import_path, std::ios::in);
 	if(!in.is_open())
 		return;
+	
+	size_t new_capacity = 0;
+	in >> new_capacity;
+	if(!new_capacity)
+		return;
 
-	in >> _capacity;
-	delete[] _seq;
+	if(_seq != nullptr)
+		delete[] _seq;
+	_capacity = new_capacity;
 	_size = 0;
 	_seq = new Move*[++_capacity];
-
 
 	double x = 0, y = 0;
 	size_t time = 0;
@@ -128,6 +133,8 @@ void Array::import_from_file(const std::string& import_path) {
 			_seq[_size++] = move;
 		}
 	}
+
+	in.close();
 }
 
 void Array::pop_back() {
@@ -164,7 +171,7 @@ size_t Array::capacity() const {
 
 void Array::resize() {
 	size_t new_capacity = _capacity * 2;
-	Move** new_seq = new Move*[_capacity];
+	Move** new_seq = new Move*[new_capacity];
 	
 	for(size_t i = 0; i < _capacity; ++i) {
 		new_seq[i] = _seq[i];

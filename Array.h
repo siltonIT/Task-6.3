@@ -37,8 +37,7 @@ public:
 			_seq = new Move*[_capacity];
 
 		Move* move = new T(data);
-		_seq[_size] = move;
-		++_size;
+		_seq[_size++] = move;
 	}
 
 	void export_to_file(const std::string&) const;
