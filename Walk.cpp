@@ -14,3 +14,10 @@ void Walk::print() const {
 	std::cout << "End position: " << _end._x << ' ' << _end._y << std::endl;
 	std::cout << "Route time: " << _time << " minutes" << std::endl;
 }
+
+std::string Walk::get_fields() const {
+        std::string info = "Walk";                                                                                                                                                     
+        info += '\n' + std::to_string(_start._x) + ' ' + std::to_string(_start._y) + '\n';                                                                                                	info += std::to_string(_end._x) + ' ' + std::to_string(_end._y) + '\n';                                                                                                    
+        info += std::to_string(_time) + '\n';                                                                                                                             
+        return info;                                                                                                                                                          
+}

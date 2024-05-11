@@ -12,4 +12,6 @@ public:
 	Move* clone() const override;
 
 	void print() const override;
+	
+	std::string get_fields() const override;
 };

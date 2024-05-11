@@ -20,6 +20,8 @@ public:
 
 	virtual Move* clone() const = 0;
 
+	virtual std::string get_fields() const = 0;
+
 	Point get_start() const;
 	void set_start(const Point&);
 

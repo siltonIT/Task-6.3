@@ -16,3 +16,12 @@ void Trolley::print() const {
 	std::cout << "Route time: " << _time << " minutes" << std::endl;
 }
 
+std::string Trolley::get_fields() const {
+        std::string info = "Trolley";
+        info += '\n' + std::to_string(_start._x) + ' ' + std::to_string(_start._y) + '\n';
+        info += std::to_string(_end._x) + ' ' + std::to_string(_end._y) + '\n';
+        info += std::to_string(_time) + '\n';
+	info += std::to_string(_price) + '\n';
+
+        return info;    
+}

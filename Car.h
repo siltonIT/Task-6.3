@@ -17,6 +17,8 @@ public:
 
         void print() const override;
 
+	std::string get_fields() const override; 
+
 	char* get_path() const;
 	void set_path(char*&);
 
