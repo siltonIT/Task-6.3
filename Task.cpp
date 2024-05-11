@@ -2,7 +2,10 @@
 
 int main() {
 	Array move;
-
+	std::string path = "data.txt";
+	move.import_from_file(path);
+	move.print();
+/*
 	Point start(1, 2);
 	Point end(5, 4);
 	size_t time = 50;
@@ -26,8 +29,8 @@ int main() {
 	start._x = 1; start._y = 47;
         end._x = 35; end._y = 143;
         time = 30;                             
-        price = 0.95;                                                                                                                                                                    	Trolley trolly(start, end, time, price);
-	move.push_back(trolly);
+        price = 0.95;                                                                                                                                                                    	Trolley trolley(start, end, time, price);	
+	move.push_back(trolley);
 
 	start._x = 1; start._y = 7;                                                                                                                                                     
         end._x = 59; end._y = 7183;
@@ -42,6 +45,7 @@ int main() {
 	char* path = new char[17]{'h', 't', 't', 'p', ':', '/', '/', 'd', 'r', 'i', 'v', 'e', '.', 'c', 'o', 'm' };
 	Car car(start, end, time, price, path);
 	move.push_back(car);
+*/
+	move.export_to_file(path);
 
-	move.print();
 }
