@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <fstream>
+#include <string>
 #include "Move.h"
 #include "Walk.h"
 #include "Bus.h"
